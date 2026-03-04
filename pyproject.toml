@@ -1,0 +1,37 @@
+[project]
+name = "hocloop-well-sensitivity"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.14"
+dependencies = [
+    "pandas>=3.0.1",
+    "salib>=1.5.2",
+    "scikit-learn>=1.8.0",
+    "scipy>=1.17.1",
+]
+
+[tool.hocloop.logging]
+version = 1
+disable_existing_loggers = false
+
+[tool.hocloop.logging.formatters.standard]
+format = "%(asctime)s- %(module)-30s %(lineno)-4d - %(levelname)-8s - %(message)s%(extra)s"
+"()" = "utils.hc_logger.ExtraFormatter"
+
+[tool.hocloop.logging.handlers.console]
+class = "logging.StreamHandler"
+formatter = "standard"
+level = "DEBUG"
+stream = "ext://sys.stdout"
+
+[tool.hocloop.logging.handlers.file]
+class = "logging.FileHandler"
+level = "DEBUG"
+formatter = "standard"
+filename = "logs/hocloop-well-sensitivity.log"
+encoding = "utf-8"
+mode = "w"
+
+[tool.hocloop.logging.root]
+level = "INFO"
+handlers = ["console", "file"]
