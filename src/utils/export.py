@@ -36,7 +36,9 @@ def save_sensitivity_results(
     logger.info("Saving sensitivity results to %s", output_dir)
 
     # Save Spearman results (DataFrame)
-    spearman_results.to_csv(output_path / "spearman_sensitivity_results.csv", index=True)
+    spearman_results.to_csv(
+        output_path / "spearman_sensitivity_results.csv", index=True
+    )
     spearman_results.to_json(
         output_path / "spearman_sensitivity_results.json", orient="index", indent=2
     )
@@ -47,7 +49,9 @@ def save_sensitivity_results(
 
     with open(output_path / "sobol_sensitivity_results.json", "w") as f:
         json.dump(
-            {k: v.to_dict(orient="index") for k, v in sobol_results.items()}, f, indent=2
+            {k: v.to_dict(orient="index") for k, v in sobol_results.items()},
+            f,
+            indent=2,
         )
 
     # Save Morris results (dict of DataFrames)
@@ -56,7 +60,9 @@ def save_sensitivity_results(
 
     with open(output_path / "morris_sensitivity_results.json", "w") as f:
         json.dump(
-            {k: v.to_dict(orient="index") for k, v in morris_results.items()}, f, indent=2
+            {k: v.to_dict(orient="index") for k, v in morris_results.items()},
+            f,
+            indent=2,
         )
 
     # Save RF Permutation results (nested dict with Series)
@@ -67,7 +73,10 @@ def save_sensitivity_results(
                 header=True,
             )
 
-    rf_data = {output: {k: v.to_dict() for k, v in metrics.items()} for output, metrics in rf_results.items()}
+    rf_data = {
+        output: {k: v.to_dict() for k, v in metrics.items()}
+        for output, metrics in rf_results.items()
+    }
     with open(output_path / "rf_permutation_sensitivity_results.json", "w") as f:
         json.dump(rf_data, f, indent=2)
 
