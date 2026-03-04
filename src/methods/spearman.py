@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 @register_sensitivity_method("spearman")
-def spearman_sensitivity(params: pd.DataFrame, results: pd.DataFrame) -> pd.DataFrame:
+def spearman_sensitivity(params: pd.DataFrame, results: pd.DataFrame):
     """
     Calculate Spearman sensitivity between model parameters and outputs.
 
@@ -36,4 +36,5 @@ def spearman_sensitivity(params: pd.DataFrame, results: pd.DataFrame) -> pd.Data
     for r in results.columns:
         sensitivity[r] = params.corrwith(results[r], method="spearman")
 
+    logger.info("Spearman sensitivity indices computed")
     return sensitivity
