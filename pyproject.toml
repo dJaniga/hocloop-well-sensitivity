@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "Add your description here"
 requires-python = ">=3.14"
 dependencies = [
+    "chaospy>=4.3.21",
     "pandas>=3.0.1",
     "salib>=1.5.2",
     "scikit-learn>=1.8.0",
@@ -28,7 +29,7 @@ stream = "ext://sys.stdout"
 class = "logging.FileHandler"
 level = "DEBUG"
 formatter = "standard"
-filename = "logs/hocloop-well-sensitivity.log"
+filename = "logs/hocloop-well-sensitivity${HOCLOOP_LOG_SUFFIX:}.log"
 encoding = "utf-8"
 mode = "w"
 

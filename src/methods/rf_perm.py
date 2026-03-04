@@ -3,9 +3,12 @@ import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.inspection import permutation_importance
 
+from pipeline import register_sensitivity_method
+
 logger = logging.getLogger(__name__)
 
 
+@register_sensitivity_method("rf_perm")
 def rf_permutation_sensitivity(
     params_f: pd.DataFrame,
     results_f: pd.DataFrame,
@@ -44,7 +47,7 @@ def rf_permutation_sensitivity(
         y = results_f[out].values
 
         rf = RandomForestRegressor(
-            n_estimators=n_estimators, n_jobs=-1, random_state=42, verbose=1
+            n_estimators=n_estimators, n_jobs=1, random_state=42, verbose=0
         )
 
         rf.fit(X, y)

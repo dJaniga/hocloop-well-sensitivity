@@ -3,9 +3,12 @@ import logging
 import pandas as pd
 from SALib.analyze import morris
 
+from pipeline import register_sensitivity_method
+
 logger = logging.getLogger(__name__)
 
 
+@register_sensitivity_method("morris")
 def morris_sensitivity(params_f: pd.DataFrame, results_f: pd.DataFrame):
     """
     Compute Morris sensitivity indices.

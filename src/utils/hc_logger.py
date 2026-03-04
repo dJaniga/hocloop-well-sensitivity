@@ -1,5 +1,6 @@
 import logging
 import logging.config
+import os
 import tomllib
 from pathlib import Path
 
@@ -51,6 +52,14 @@ def setup_logging() -> None:
     logging_config = config["tool"]["hocloop"]["logging"]
 
     Path("logs").mkdir(parents=True, exist_ok=True)
+
+    # Replace environment variable placeholder in filename
+    suffix = os.environ.get("HOCLOOP_LOG_SUFFIX", "")
+    if "handlers" in logging_config and "file" in logging_config["handlers"]:
+        filename = logging_config["handlers"]["file"]["filename"]
+        logging_config["handlers"]["file"]["filename"] = filename.replace(
+            "${HOCLOOP_LOG_SUFFIX:}", suffix
+        )
 
     try:
         logging.config.dictConfig(logging_config)
