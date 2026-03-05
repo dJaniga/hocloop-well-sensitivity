@@ -2,12 +2,10 @@ import logging
 
 import pandas as pd
 
-from pipeline import register_sensitivity_method
 
 logger = logging.getLogger(__name__)
 
 
-@register_sensitivity_method("spearman")
 def spearman_sensitivity(params: pd.DataFrame, results: pd.DataFrame):
     """
     Calculate Spearman sensitivity between model parameters and outputs.

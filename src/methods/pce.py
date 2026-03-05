@@ -1,19 +1,16 @@
+import itertools
 import logging
 import warnings
-import itertools
 
 import chaospy as cp
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
-
-from pipeline import register_sensitivity_method
 
 logger = logging.getLogger(__name__)
 
 warnings.filterwarnings("ignore", message=".*where.*unitialized memory.*")
 
 
-@register_sensitivity_method("pce")
 def pce_sensitivity(params_f: pd.DataFrame, results_f: pd.DataFrame, order: int = 2):
     """
     Perform Polynomial Chaos Expansion (PCE) sensitivity analysis on the given parameters and results.

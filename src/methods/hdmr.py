@@ -4,13 +4,11 @@ import logging
 import pandas as pd
 from SALib.analyze import enhanced_hdmr
 
-from pipeline import register_sensitivity_method
 
 logger = logging.getLogger(__name__)
 
 
-@register_sensitivity_method("hdmr")
-def hdmr_sensitivity(params_f: pd.DataFrame, results_f: pd.DataFrame, order=2):
+def hdmr_sensitivity(params_f: pd.DataFrame, results_f: pd.DataFrame, order=3):
     """
     Perform enhanced HDMR sensitivity analysis on the given parameters and results.
     """

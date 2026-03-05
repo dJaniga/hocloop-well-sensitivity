@@ -29,7 +29,7 @@ stream = "ext://sys.stdout"
 class = "logging.FileHandler"
 level = "DEBUG"
 formatter = "standard"
-filename = "logs/hocloop-well-sensitivity${HOCLOOP_LOG_SUFFIX:}.log"
+filename = "logs/hocloop-well-sensitivity.log"
 encoding = "utf-8"
 mode = "w"
 

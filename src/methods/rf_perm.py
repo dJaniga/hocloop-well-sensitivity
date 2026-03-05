@@ -3,12 +3,10 @@ import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.inspection import permutation_importance
 
-from pipeline import register_sensitivity_method
 
 logger = logging.getLogger(__name__)
 
 
-@register_sensitivity_method("rf_perm")
 def rf_permutation_sensitivity(
     params_f: pd.DataFrame,
     results_f: pd.DataFrame,
