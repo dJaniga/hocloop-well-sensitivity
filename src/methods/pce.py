@@ -11,10 +11,12 @@ logger = logging.getLogger(__name__)
 warnings.filterwarnings("ignore", message=".*where.*unitialized memory.*")
 
 
-def pce_sensitivity(params_f: pd.DataFrame, results_f: pd.DataFrame, order: int = 2):
+def pce_sensitivity(params_f: pd.DataFrame, results_f: pd.DataFrame):
     """
     Perform Polynomial Chaos Expansion (PCE) sensitivity analysis on the given parameters and results.
     """
+
+    order: int = 2
 
     logger.info("Starting PCE sensitivity analysis (order=%s)", order)
 

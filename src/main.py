@@ -27,8 +27,8 @@ def main() -> None:
     save_sensitivity_results(**{"morris": morris_sensitivity(params, results)})
     save_sensitivity_results(**{"sobol": sobol_sensitivity(params, results)})
     save_sensitivity_results(**{"rf_perm": rf_permutation_sensitivity(params, results)})
-    save_sensitivity_results(**{"pce": pce_sensitivity(params, results, order=2)})
-    save_sensitivity_results(**{"hdmr": hdmr_sensitivity(params, results, order=2)})
+    save_sensitivity_results(**{"pce": pce_sensitivity(params, results)})
+    save_sensitivity_results(**{"hdmr": hdmr_sensitivity(params, results)})
 
 
 if __name__ == "__main__":

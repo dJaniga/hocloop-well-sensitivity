@@ -20,8 +20,10 @@ def sobol_sensitivity(params_f: pd.DataFrame, results_f: pd.DataFrame):
 
     Returns
     -------
-    dict[str, pd.DataFrame]
-        Sobol indices for each output variable
+    dict[str, dict[str, pd.DataFrame]]
+        Sobol indices for each output variable, containing:
+        - 'main_effects': DataFrame with S1 and ST indices
+        - 'interactions': dict with 'second_order' DataFrame
     """
 
     logger.info("Computing Sobol sensitivity indices")
@@ -39,7 +41,8 @@ def sobol_sensitivity(params_f: pd.DataFrame, results_f: pd.DataFrame):
 
         Si = sobol.analyze(problem, Y, calc_second_order=True)
 
-        df = pd.DataFrame(
+        # Main effects (first-order and total)
+        main_effects = pd.DataFrame(
             {
                 "S1": Si["S1"],
                 "S1_conf": Si["S1_conf"],
@@ -49,6 +52,26 @@ def sobol_sensitivity(params_f: pd.DataFrame, results_f: pd.DataFrame):
             index=problem["names"],
         )
 
-        results[out] = df
+        # Second-order interactions
+        s2_matrix = Si["S2"]
+        s2_conf_matrix = Si["S2_conf"]
+
+        # Create list of interaction pairs with their indices
+        interactions_data = []
+        for i in range(len(problem["names"])):
+            for j in range(i + 1, len(problem["names"])):
+                interactions_data.append({
+                    "Parameter_1": problem["names"][i],
+                    "Parameter_2": problem["names"][j],
+                    "S2": s2_matrix[i, j],
+                    "S2_conf": s2_conf_matrix[i, j],
+                })
+
+        second_order = pd.DataFrame(interactions_data)
+
+        results[out] = {
+            "main_effects": main_effects,
+            "interactions": {"second_order": second_order}
+        }
 
     return results

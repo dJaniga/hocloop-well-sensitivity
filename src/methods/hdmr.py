@@ -8,10 +8,12 @@ from SALib.analyze import enhanced_hdmr
 logger = logging.getLogger(__name__)
 
 
-def hdmr_sensitivity(params_f: pd.DataFrame, results_f: pd.DataFrame, order=3):
+def hdmr_sensitivity(params_f: pd.DataFrame, results_f: pd.DataFrame):
     """
     Perform enhanced HDMR sensitivity analysis on the given parameters and results.
     """
+
+    order: int = 2
 
     logger.info("Starting enhanced HDMR sensitivity analysis")
 
